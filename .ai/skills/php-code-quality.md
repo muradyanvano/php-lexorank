@@ -16,7 +16,7 @@
 
 ```bash
 composer check
-# = validate + format-check + analyse + test
+# = validate-package + format-check + analyse + test
 ```
 
 **Required before merge:** `composer check` passes.

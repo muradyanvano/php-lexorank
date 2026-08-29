@@ -69,9 +69,9 @@
         "rector": "rector process",
         "rector-check": "rector process --dry-run",
         "infection": "infection --threads=max --min-msi=70 --min-covered-msi=70",
-        "validate": "composer validate --strict",
+        "validate-package": "composer validate --strict",
         "check": [
-            "@validate",
+            "@validate-package",
             "@format-check",
             "@analyse",
             "@test"

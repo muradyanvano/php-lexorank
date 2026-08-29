@@ -316,7 +316,7 @@ Scripts:
 | `composer test` | PHPUnit (Unit, Integration, Laravel) |
 | `composer analyse` | PHPStan level 9 |
 | `composer format-check` | PHP CS Fixer dry run |
-| `composer validate` | Composer schema strict |
+| `composer validate-package` | Composer schema strict (`composer validate --strict`) |
 
 ---
 
