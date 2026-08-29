@@ -1,0 +1,19 @@
+{
+    "timeout": 120,
+    "source": {
+        "directories": [
+            "src"
+        ],
+        "excludes": [
+            "src/Laravel"
+        ]
+    },
+    "mutators": {
+        "@default": true
+    },
+    "logs": {
+        "text": "infection.log"
+    },
+    "minMsi": 70,
+    "minCoveredMsi": 70
+}

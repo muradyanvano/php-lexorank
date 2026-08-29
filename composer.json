@@ -1,0 +1,98 @@
+{
+    "name": "muradyanvano/php-lexorank",
+    "description": "Production-ready LexoRank implementation for PHP — deterministic lexicographic ranking for ordered lists, Kanban boards, and drag-and-drop UIs.",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "lexorank",
+        "ranking",
+        "ordering",
+        "fractional-indexing",
+        "sortable",
+        "kanban",
+        "drag-and-drop",
+        "laravel",
+        "eloquent"
+    ],
+    "authors": [
+        {
+            "name": "Vano Muradyan"
+        }
+    ],
+    "homepage": "https://github.com/muradyanvano/php-lexorank",
+    "support": {
+        "issues": "https://github.com/muradyanvano/php-lexorank/issues",
+        "source": "https://github.com/muradyanvano/php-lexorank"
+    },
+    "require": {
+        "php": "^8.1"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.64",
+        "infection/infection": "^0.27",
+        "larastan/larastan": "^2.9",
+        "orchestra/testbench": "^8.35|^9.0|^10.0",
+        "phpstan/phpstan": "^1.12",
+        "phpstan/phpstan-phpunit": "^1.4",
+        "phpstan/phpstan-strict-rules": "^1.6",
+        "phpunit/phpunit": "^10.5",
+        "rector/rector": "^1.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "MuradyanVano\\LexoRank\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "MuradyanVano\\LexoRank\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "MuradyanVano\\LexoRank\\Laravel\\LexoRankServiceProvider"
+            ],
+            "aliases": {
+                "LexoRankFacade": "MuradyanVano\\LexoRank\\Laravel\\Facades\\LexoRank"
+            }
+        }
+    },
+    "scripts": {
+        "test": "phpunit --colors=always",
+        "test:unit": "phpunit --testsuite=Unit --colors=always",
+        "test:integration": "phpunit --testsuite=Integration --colors=always",
+        "test:laravel": "phpunit --testsuite=Laravel --colors=always",
+        "analyse": "phpstan analyse --memory-limit=512M",
+        "format": "php-cs-fixer fix --allow-risky=yes",
+        "format-check": "php-cs-fixer fix --dry-run --diff --allow-risky=yes",
+        "rector": "rector process",
+        "rector-check": "rector process --dry-run",
+        "infection": "infection --threads=max --min-msi=70 --min-covered-msi=70",
+        "validate": "composer validate --strict",
+        "check": [
+            "@validate",
+            "@format-check",
+            "@analyse",
+            "@test"
+        ]
+    },
+    "scripts-descriptions": {
+        "test": "Run the PHPUnit test suite",
+        "analyse": "Run PHPStan static analysis",
+        "format": "Fix coding style with PHP CS Fixer",
+        "format-check": "Check coding style without writing",
+        "check": "Validate, format-check, analyse, and test"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "infection/extension-installer": true
+        },
+        "audit": {
+            "block-insecure": false
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}

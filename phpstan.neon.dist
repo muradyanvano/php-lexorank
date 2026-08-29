@@ -1,0 +1,12 @@
+parameters:
+    level: 9
+    paths:
+        - src
+    excludePaths:
+        - src/Laravel/config
+    treatPhpDocTypesAsCertain: false
+
+includes:
+    - vendor/phpstan/phpstan-phpunit/extension.neon
+    - vendor/phpstan/phpstan-strict-rules/rules.neon
+    - vendor/larastan/larastan/extension.neon
