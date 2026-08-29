@@ -35,7 +35,7 @@ This implementation uses **base-36 digit arrays** (no floats, BCMath, or GMP), *
 
 - PHP **^8.1** (framework-independent core)
 - Laravel integration is **optional** (not a runtime dependency)
-- Running package Laravel tests / using Testbench locally requires **PHP 8.2+** and **Laravel 12.61.1+** (see compatibility below)
+- Developing/testing the Laravel layer needs **PHP 8.2+** and an explicit install of Laravel 12.61.1+ / Testbench 10 (not part of default `require-dev`, so PHP 8.1 `composer update` keeps working)
 
 ---
 
@@ -216,6 +216,13 @@ Optional. The core installs without Laravel. Supported integration testing targe
 |---------|-----------|-----|
 | **12.61.1+** | ^10 | **8.2+** |
 
+Default `composer update` in this repo does **not** install Laravel (so PHP 8.1 works). For Laravel tests:
+
+```bash
+composer require --dev laravel/framework:^12.61.1 orchestra/testbench:^10.0 larastan/larastan:^3.0
+composer test:laravel
+```
+
 Laravel 10/11 are **not** claimed or CI-verified (unpatched advisories on those lines).
 
 **Cast:**
@@ -314,16 +321,17 @@ Always `parse()` external ranks and persist canonical output. Details: [docs/arc
 ```bash
 git clone https://github.com/muradyanvano/php-lexorank.git
 cd php-lexorank
-composer install
-composer check    # validate + format-check + phpstan + phpunit
+composer update
+composer check    # validate + format-check + phpstan + core tests (PHP 8.1+)
 ```
 
 Scripts:
 
 | Command | Action |
 |---------|--------|
-| `composer test` | PHPUnit (Unit, Integration, Laravel) |
-| `composer analyse` | PHPStan level 9 |
+| `composer test:core` | PHPUnit Unit + Integration (PHP 8.1+) |
+| `composer test` | All suites (Laravel suite needs extra deps on PHP 8.2+) |
+| `composer analyse` | PHPStan level 9 (core; `src/Laravel` excluded) |
 | `composer format-check` | PHP CS Fixer dry run |
 | `composer validate-package` | Composer schema strict (`composer validate --strict`) |
 

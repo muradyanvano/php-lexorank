@@ -1,0 +1,9 @@
+includes:
+    - phpstan.neon.dist
+    - vendor/larastan/larastan/extension.neon
+
+parameters:
+    paths:
+        - src
+    excludePaths:
+        - src/Laravel/config

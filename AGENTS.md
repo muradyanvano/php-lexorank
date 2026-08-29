@@ -13,39 +13,51 @@ Instructions for coding agents working on `muradyanvano/php-lexorank`.
 - Composer package: `muradyanvano/php-lexorank`
 - Namespace: `MuradyanVano\LexoRank`
 - Runtime: PHP `^8.1`, **no** Laravel runtime dependency
-- Laravel / Testbench / Larastan are **require-dev only** (optional integration)
+- Default `require-dev` is PHP **8.1-compatible** (PHPUnit, PHPStan, CS Fixer, Infection, Rector)
+- Laravel / Testbench / Larastan are **not** in default `require-dev`; CI and docs install them only on PHP 8.2+
 
 ## Compatibility (must stay truthful)
 
 | Surface | Support |
 |---------|---------|
-| Core library | PHP 8.1+ |
+| Core library (consumers + Unit/Integration) | PHP **8.1+** |
+| `composer install` / `composer update` in this repo | PHP **8.1+** (default require-dev) |
 | Laravel integration tests | Laravel **12.61.1+** via Orchestra Testbench **^10**, PHP **8.2+** |
-| Do not claim | Laravel 10/11 as supported (unpatched / not CI-verified) |
+| Do not claim | Laravel 10/11 as supported |
 
-PHP 8.1 CI runs **Unit + Integration only** (Laravel deps stripped). PHP 8.2+ runs Laravel suite + `composer audit`.
+```bash
+# PHP 8.1+ (default)
+composer update
+composer test:core
+composer check
+
+# PHP 8.2+ Laravel suite
+composer require --dev laravel/framework:^12.61.1 orchestra/testbench:^10.0 larastan/larastan:^3.0
+composer test:laravel
+vendor/bin/phpstan analyse -c phpstan-laravel.neon.dist --memory-limit=512M
+```
 
 ## Security / Composer rules
 
 - Never suppress or ignore security advisories.
 - Never set `audit.block-insecure` to `false`.
 - Never use `--ignore-platform-reqs` to paper over version conflicts.
-- Dev lockset must keep `laravel/framework` at **≥ 12.61.1** (or ≥ 13.12.0 if/when adopted).
-- Plain PHP consumers must install without requiring Laravel.
+- Do not put unpatched Laravel 10/11 into default `require-dev` (breaks `composer audit` on PHP 8.1).
+- Plain PHP consumers must install the package without requiring Laravel.
 
-## Quality gates (run before finishing)
+## Quality gates
 
 ```bash
 composer validate --strict
-composer install   # or update when lock is absent / intentionally refreshed
-composer test
-composer analyse
+composer update          # or install when lock is present
+composer test:core       # Unit + Integration (PHP 8.1+)
+composer analyse         # core only (src/Laravel excluded)
 composer format-check
 composer audit
-composer check     # validate-package + format-check + analyse + test
+composer check
 ```
 
-Do not claim a command passed unless it was executed successfully in this environment.
+Do not claim a command passed unless it was executed successfully.
 
 ## Algorithm / architecture constraints
 
@@ -53,26 +65,7 @@ Do not claim a command passed unless it was executed successfully in this enviro
 - Exact digit-array arithmetic under `src/Math/` (`@internal`).
 - Prefer no runtime dependencies for the core.
 - Do not replace LexoRank with naive fractional float indexing.
-- Public API vs `@internal` boundaries: see `.ai/skills/package-architecture.md` and `.ai/skills/lexorank-algorithm.md`.
 
 ## Change synchronization
 
-Any change that affects behavior, public API, supported versions, CI, commands, or release workflow must update the matching `.ai` skill(s), `README.md` / `docs/*`, and `CHANGELOG.md` in the same change.
-
-## Do not
-
-- Publish to Packagist, create Git tags, or push unless the human explicitly asks.
-- Remove Laravel integration tests.
-- Add Laravel types/imports to core domain classes.
-- Invent undocumented Atlassian-compatible behavior.
-
-## Task template: dependency / audit fixes
-
-When fixing `composer audit` findings for Laravel:
-
-1. Inspect `composer.json`, lockfile, workflows, Laravel tests, docs.
-2. Run `composer show` / `why` / `outdated` / `why-not` for the affected packages.
-3. Move to a patched Laravel line (12.61.1+ or 13.12.0+).
-4. Keep core PHP 8.1; adjust CI matrix so unsupported PHP/Laravel pairs are not claimed or tested.
-5. Re-run full quality gates including `composer audit`.
-6. Report root cause, version delta, files changed, and every command result.
+Any change that affects behavior, public API, supported versions, CI, commands, or release workflow must update the matching `.ai` skill(s), `README.md` / `docs/*`, `CHANGELOG.md`, and this file when needed.

@@ -11,8 +11,41 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  analyse:
-    name: PHPStan & format check
+  analyse-core:
+    name: PHPStan core & format check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+          coverage: none
+          tools: composer:v2
+
+      - name: Cache Composer
+        uses: actions/cache@v4
+        with:
+          path: ~/.composer/cache/files
+          key: composer-analyse-core-${{ hashFiles('composer.json') }}
+          restore-keys: |
+            composer-analyse-core-
+
+      - name: Install dependencies
+        run: composer update --prefer-stable --no-interaction --no-progress
+
+      - name: Composer audit
+        run: composer audit
+
+      - name: PHP CS Fixer (dry run)
+        run: composer format-check
+
+      - name: PHPStan (core)
+        run: composer analyse
+
+  analyse-laravel:
+    name: PHPStan Laravel layer
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -28,18 +61,20 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.composer/cache/files
-          key: composer-analyse-${{ hashFiles('composer.json') }}
+          key: composer-analyse-laravel-${{ hashFiles('composer.json') }}
           restore-keys: |
-            composer-analyse-
+            composer-analyse-laravel-
 
-      - name: Install dependencies
-        run: composer update --prefer-stable --no-interaction --no-progress
+      - name: Install dependencies with Laravel
+        run: |
+          composer require --dev --no-update \
+            "laravel/framework:^12.61.1" \
+            "orchestra/testbench:^10.0" \
+            "larastan/larastan:^3.0"
+          composer update --prefer-stable --no-interaction --no-progress
 
       - name: Composer audit
         run: composer audit
 
-      - name: PHP CS Fixer (dry run)
-        run: composer format-check
-
-      - name: PHPStan
-        run: composer analyse
+      - name: PHPStan (Laravel)
+        run: vendor/bin/phpstan analyse -c phpstan-laravel.neon.dist --memory-limit=512M

@@ -7,11 +7,19 @@ Optional Eloquent helpers for applications using Laravel. The core package has *
 | Component | Version |
 |-----------|---------|
 | Package core | PHP **8.1+** |
+| Default repo `composer update` | PHP **8.1+** (Laravel not in require-dev) |
 | Laravel (integration / Testbench) | **12.61.1+** |
-| Orchestra Testbench (require-dev) | **^10** |
+| Orchestra Testbench (CI / optional) | **^10** |
 | PHP for Laravel tests | **8.2+** |
 
-Laravel 10 and 11 are not part of the verified matrix: published security advisories remain open on those lines, and CI does not install them.
+Laravel 10 and 11 are not part of the verified matrix.
+
+To run Laravel tests locally (PHP 8.2+):
+
+```bash
+composer require --dev laravel/framework:^12.61.1 orchestra/testbench:^10.0 larastan/larastan:^3.0
+composer test:laravel
+```
 
 ## Installation
 

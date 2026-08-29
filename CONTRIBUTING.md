@@ -10,7 +10,7 @@ cd php-lexorank
 composer install
 ```
 
-Requirements: PHP **^8.1** (core), Composer 2.x. Full Laravel test suite needs **PHP 8.2+**.
+Requirements: PHP **^8.1** for core development (`composer update` / `composer check`). Laravel test suite needs **PHP 8.2+** plus an explicit Laravel 12.61.1+ / Testbench install (see `docs/laravel.md`).
 
 ## Quality gate
 

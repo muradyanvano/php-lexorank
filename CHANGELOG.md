@@ -9,10 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Default `require-dev` no longer includes Laravel/Testbench/Larastan, so **`composer update` works on PHP 8.1** while core remains `php: ^8.1`.
+- Laravel 12.61.1+ / Testbench 10 are installed only in Laravel CI jobs (and optionally by contributors on PHP 8.2+).
 - Raised Laravel integration test floor to **Laravel 12.61.1+** / Orchestra Testbench **^10** (PHP 8.2+) to clear `composer audit` advisories that remain open on Laravel 10/11.
 - Removed Composer `audit.block-insecure: false`; CI now fails on known vulnerabilities.
-- Documented truthful matrix: PHP 8.1 runs core tests only; Laravel suite requires PHP 8.2+.
-- Added root `AGENTS.md` for coding agents.
+- Split PHPStan configs: `phpstan.neon.dist` (core) and `phpstan-laravel.neon.dist` (Laravel + Larastan).
+- Added root `AGENTS.md` and `composer test:core` / `composer check` targeting PHP 8.1-friendly workflows.
 
 ### Added
 

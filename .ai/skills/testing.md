@@ -8,75 +8,42 @@
 |-------|------|-------|-----|
 | Unit | `tests/Unit/` | LexoRank, Math, Service, Rebalancer, invariants | 8.1+ |
 | Integration | `tests/Integration/` | Performance / larger scenarios | 8.1+ |
-| Laravel | `tests/Laravel/` | Testbench, cast, trait, facade | **8.2+** (Laravel 12.61.1+) |
+| Laravel | `tests/Laravel/` | Testbench, cast, trait, facade | **8.2+** after installing Laravel deps |
 
 ## Commands
 
 ```bash
-composer test              # all suites (Laravel needs PHP 8.2+)
-composer test:unit
-composer test:integration
+composer test:core         # Unit + Integration (PHP 8.1+)
+composer test              # all suites (Laravel needs extra deps)
 composer test:laravel
-composer audit             # must report no known vulnerabilities
+composer check             # validate + format + analyse + test:core
+composer audit
 ```
 
-## Key test files
+## PHPStan
 
-| File | Covers |
-|------|--------|
-| `LexoRankTest.php` | parse, between, before/after, buckets, strcmp invariant |
-| `InvariantTest.php` | broader ordering invariants |
-| `MathTest.php` | internal decimal arithmetic |
-| `ServiceAndRebalancerTest.php` | betweenMany, rebalance, duplicates |
-| `LaravelIntegrationTest.php` | container, cast, trait, facade |
-| `PerformanceTest.php` | integration performance |
-
-## Invariants to preserve
-
-1. `strcmp` === `compareTo()` on canonical strings
-2. `between` strictly inside bounds
-3. Adjacent ranks produce fractional midpoints
-4. Parse round-trip canonical form
-5. Rebalance preserves count and strict order in new bucket
-6. Duplicate / unsorted rebalance input throws
-
-## Writing new tests
-
-- Namespace: `MuradyanVano\LexoRank\Tests\...`
-- Use `final class ...Test extends TestCase`
-- Prefer data from actual API (`LexoRank::parse('0|100000:')`) not invented ranks
-- Exception tests: `expectException` with specific exception class
-- Every bug fix must add a regression test that fails before the fix
-
-## Laravel tests
-
-Extend `Orchestra\Testbench\TestCase`:
-
-- `getPackageProviders()` → `[LexoRankServiceProvider::class]`
-- `getPackageAliases()` → `LexoRankFacade`
-- Define migrations in `defineDatabaseMigrations()`
-
-Require-dev lockset: `laravel/framework ^12.61.1`, `orchestra/testbench ^10.0`.
-
-## Mutation testing
-
-```bash
-composer infection
-```
-
-Thresholds in `infection.json.dist` (min MSI 70%).
+- `phpstan.neon.dist` — core only (`src/Laravel` excluded); runs on PHP 8.1
+- `phpstan-laravel.neon.dist` — full `src/` + Larastan; CI on PHP 8.3 after requiring Laravel
 
 ## CI alignment
 
 `.github/workflows/tests.yml`:
 
-- PHP **8.1**: strip Laravel/Testbench/Larastan, pin PHPUnit 10, run Unit+Integration
-- PHP **8.2–8.4**: full install, Unit+Integration; separate Laravel job runs Laravel suite + `composer audit`
-- Static analysis job (PHP 8.3): format-check, PHPStan, audit
+- PHP **8.1–8.4**: default require-dev, Unit+Integration, audit
+- PHP **8.2–8.4**: require Laravel 12.61.1+ / Testbench 10, Laravel suite, audit
 
-After adding tests, run locally (on PHP 8.2+ for full suite):
+`.github/workflows/static-analysis.yml`:
 
-```bash
-composer check
-composer audit
-```
+- Core analyse + format on PHP 8.1
+- Laravel analyse on PHP 8.3 with Larastan
+
+## Invariants
+
+1. `strcmp` === `compareTo()` on canonical strings  
+2. `between` strictly inside bounds  
+3. Adjacent ranks produce fractional midpoints  
+4. Parse round-trip canonical form  
+5. Rebalance preserves count and strict order in new bucket  
+6. Duplicate / unsorted rebalance input throws  
+
+Every bug fix must add a regression test that fails before the fix.

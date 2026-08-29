@@ -30,14 +30,14 @@
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.64",
         "infection/infection": "^0.27|^0.29",
-        "larastan/larastan": "^3.0",
-        "laravel/framework": "^12.61.1",
-        "orchestra/testbench": "^10.0",
-        "phpstan/phpstan": "^2.0",
-        "phpstan/phpstan-phpunit": "^2.0",
-        "phpstan/phpstan-strict-rules": "^2.0",
+        "phpstan/phpstan": "^1.12|^2.0",
+        "phpstan/phpstan-phpunit": "^1.4|^2.0",
+        "phpstan/phpstan-strict-rules": "^1.6|^2.0",
         "phpunit/phpunit": "^10.5|^11.5.3",
-        "rector/rector": "^2.0"
+        "rector/rector": "^1.2|^2.0"
+    },
+    "suggest": {
+        "illuminate/support": "Required to use the optional Laravel integration (Laravel 12.61.1+ / PHP 8.2+)."
     },
     "autoload": {
         "psr-4": {
@@ -64,6 +64,7 @@
         "test:unit": "phpunit --testsuite=Unit --colors=always",
         "test:integration": "phpunit --testsuite=Integration --colors=always",
         "test:laravel": "phpunit --testsuite=Laravel --colors=always",
+        "test:core": "phpunit --testsuite=Unit,Integration --colors=always",
         "analyse": "phpstan analyse --memory-limit=512M",
         "format": "php-cs-fixer fix --allow-risky=yes",
         "format-check": "php-cs-fixer fix --dry-run --diff --allow-risky=yes",
@@ -75,15 +76,23 @@
             "@validate-package",
             "@format-check",
             "@analyse",
+            "@test:core"
+        ],
+        "check:full": [
+            "@validate-package",
+            "@format-check",
+            "@analyse",
             "@test"
         ]
     },
     "scripts-descriptions": {
-        "test": "Run the PHPUnit test suite",
-        "analyse": "Run PHPStan static analysis",
+        "test": "Run all PHPUnit suites (Laravel suite needs PHP 8.2+ and Testbench installed)",
+        "test:core": "Run Unit + Integration suites (PHP 8.1+)",
+        "analyse": "Run PHPStan static analysis on the core",
         "format": "Fix coding style with PHP CS Fixer",
         "format-check": "Check coding style without writing",
-        "check": "Validate, format-check, analyse, and test",
+        "check": "Validate, format-check, analyse, and core tests (PHP 8.1+)",
+        "check:full": "Full check including Laravel tests when Laravel deps are installed",
         "validate-package": "Validate composer.json with composer validate --strict"
     },
     "config": {

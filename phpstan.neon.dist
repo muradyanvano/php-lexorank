@@ -3,10 +3,10 @@ parameters:
     paths:
         - src
     excludePaths:
+        - src/Laravel
         - src/Laravel/config
     treatPhpDocTypesAsCertain: false
 
 includes:
     - vendor/phpstan/phpstan-phpunit/extension.neon
     - vendor/phpstan/phpstan-strict-rules/rules.neon
-    - vendor/larastan/larastan/extension.neon

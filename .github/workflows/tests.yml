@@ -28,7 +28,7 @@ jobs:
         run: composer validate --strict
 
   phpunit:
-    name: PHPUnit (PHP ${{ matrix.php }}, ${{ matrix.stability }})
+    name: PHPUnit core (PHP ${{ matrix.php }}, ${{ matrix.stability }})
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -52,17 +52,10 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.composer/cache/files
-          key: composer-${{ matrix.php }}-${{ matrix.stability }}-${{ hashFiles('composer.json') }}
+          key: composer-core-${{ matrix.php }}-${{ matrix.stability }}-${{ hashFiles('composer.json') }}
           restore-keys: |
-            composer-${{ matrix.php }}-${{ matrix.stability }}-
-            composer-${{ matrix.php }}-
-
-      - name: Strip Laravel deps on PHP 8.1 (core-only)
-        if: matrix.php == '8.1'
-        run: |
-          # Laravel 12 / Testbench 10 require PHP 8.2+. Core remains PHP 8.1-compatible.
-          composer remove --dev laravel/framework orchestra/testbench larastan/larastan --no-update
-          composer require --dev --no-update "phpunit/phpunit:^10.5"
+            composer-core-${{ matrix.php }}-${{ matrix.stability }}-
+            composer-core-${{ matrix.php }}-
 
       - name: Install dependencies (${{ matrix.stability }})
         run: |
@@ -71,6 +64,9 @@ jobs:
           else
             composer update --prefer-stable --no-interaction --no-progress
           fi
+
+      - name: Composer audit
+        run: composer audit
 
       - name: Run PHPUnit (Unit + Integration)
         run: vendor/bin/phpunit --testsuite=Unit,Integration --colors=always
@@ -100,8 +96,14 @@ jobs:
           restore-keys: |
             composer-laravel-12-${{ matrix.php }}-
 
-      - name: Install dependencies (Laravel 12.61.1+ / Testbench 10)
-        run: composer update --prefer-stable --no-interaction --no-progress
+      - name: Install core + Laravel 12.61.1+ / Testbench 10
+        run: |
+          composer require --dev --no-update \
+            "laravel/framework:^12.61.1" \
+            "orchestra/testbench:^10.0" \
+            "larastan/larastan:^3.0" \
+            "phpunit/phpunit:^11.5.3"
+          composer update --prefer-stable --no-interaction --no-progress
 
       - name: Show installed Laravel version
         run: composer show laravel/framework
