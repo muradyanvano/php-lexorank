@@ -11,10 +11,13 @@ Instructions for coding agents working on `muradyanvano/php-lexorank`.
 ## Project identity
 
 - Composer package: `muradyanvano/php-lexorank`
+- GitHub repository: `https://github.com/muradyanvano1995/php-lexorank`
 - Namespace: `MuradyanVano\LexoRank`
 - Runtime: PHP `^8.1`, **no** Laravel runtime dependency
 - Default `require-dev` is PHP **8.1-compatible** (PHPUnit, PHPStan, CS Fixer, Infection, Rector)
 - Laravel / Testbench / Larastan are **not** in default `require-dev`; CI and docs install them only on PHP 8.2+
+
+Packagist vendor (`muradyanvano`) and GitHub username (`muradyanvano1995`) differ intentionally. Do not “fix” the Composer package name to match GitHub.
 
 ## Compatibility (must stay truthful)
 

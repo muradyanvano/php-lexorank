@@ -2,6 +2,8 @@
 
 This directory contains **Cursor Agent Skills** for working on `muradyanvano/php-lexorank`.
 
+**GitHub:** `https://github.com/muradyanvano1995/php-lexorank` (Packagist vendor `muradyanvano` ≠ GitHub user `muradyanvano1995`).
+
 ## Skill index
 
 | Skill | Use when |

@@ -30,9 +30,17 @@ Exception/*           → typed failures
 
 ## Not public API
 
-- `MuradyanVano\LexoRank\Math\*` — digit arithmetic
-- `LexoRank::decimal()`, `LexoRank::betweenDecimals()` — `@internal`
-- `LexoRank::from(LexoRankBucket, LexoDecimal)` — uses internal decimal type
+- `MuradyanVano\LexoRank\Math\*` — digit arithmetic (`@internal` on types)
+- `LexoRank::decimal()`, `LexoRank::betweenDecimals()`, `LexoRank::from()` — `@internal` (still public methods for BC; do not call from apps)
+
+## Identity
+
+| Surface | Value |
+|---------|-------|
+| Composer package | `muradyanvano/php-lexorank` |
+| GitHub repository | `https://github.com/muradyanvano1995/php-lexorank` |
+
+Packagist vendor and GitHub username differ intentionally. Keep `composer.json` `homepage` / `support` on the `muradyanvano1995` GitHub path.
 
 ## Design constraints
 

@@ -2,6 +2,8 @@
 
 This document describes the design of **muradyanvano/php-lexorank** (`MuradyanVano\LexoRank`): what is public, what is internal, and how the pieces fit together.
 
+**GitHub repository:** [muradyanvano1995/php-lexorank](https://github.com/muradyanvano1995/php-lexorank) (distinct from the Composer package name).
+
 ## Goals
 
 - **Deterministic ordering** — ranks compare correctly with `strcmp` on canonical strings and with `LexoRank::compareTo()`.
@@ -66,9 +68,9 @@ The `MuradyanVano\LexoRank\Math\*` namespace is **not part of the semver public 
 - `LexoInteger` — arbitrary-precision integer in base 36
 - `LexoDecimal` — fixed-scale decimal with `:` radix; add, subtract, multiply, compare, scale expansion
 
-`LexoRank::decimal()` and `LexoRank::betweenDecimals()` are marked `@internal`. Application code should use `LexoRank` and `LexoRankService` only.
+`LexoRank::decimal()`, `LexoRank::betweenDecimals()`, and `LexoRank::from(LexoRankBucket, LexoDecimal)` are marked `@internal`. Application code should use `LexoRank` and `LexoRankService` only — do not depend on `Math\LexoDecimal`.
 
-`LexoRank::from(LexoRankBucket, LexoDecimal)` exists for internal composition; prefer `parse()` / factory methods in application code.
+Prefer `parse()`, `min()`, `max()`, `middle()`, `initial()`, `before()`, `after()`, or `between()` instead of `from()`.
 
 ## Design decisions
 

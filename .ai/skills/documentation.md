@@ -21,8 +21,9 @@
 2. Use **real examples** from tests (`0|hzzzzz:`, `0|100000:`, etc.)
 3. Namespace: `MuradyanVano\LexoRank`
 4. Facade alias is **`LexoRankFacade`**, not `LexoRank`
-5. Mark `@internal` Math as not public API
+5. Mark `@internal` Math as not public API; do not document `LexoRank::from()`, `decimal()`, or `betweenDecimals()` as consumer APIs
 6. State compatibility boundary: inspired by Atlassian, not byte-for-byte clone
+7. Distinguish Composer package `muradyanvano/php-lexorank` from GitHub repo `muradyanvano1995/php-lexorank`
 
 ## README structure (22 sections)
 

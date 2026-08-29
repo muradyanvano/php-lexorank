@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Corrected GitHub repository, issue, clone, release, and comparison links to `muradyanvano1995/php-lexorank` (Composer package name `muradyanvano/php-lexorank` unchanged).
+- Marked `LexoRank::from()` consistently as `@internal` API (method remains public; applications must not depend on `Math\LexoDecimal`).
+- Added PHPUnit regression coverage for Composer repository metadata (`homepage` / `support`).
+
 ### Changed
 
 - Default `require-dev` no longer includes Laravel/Testbench/Larastan, so **`composer update` works on PHP 8.1** while core remains `php: ^8.1`.
@@ -15,10 +21,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Removed Composer `audit.block-insecure: false`; CI now fails on known vulnerabilities.
 - Split PHPStan configs: `phpstan.neon.dist` (core) and `phpstan-laravel.neon.dist` (Laravel + Larastan).
 - Added root `AGENTS.md` and `composer test:core` / `composer check` targeting PHP 8.1-friendly workflows.
-
-### Added
-
-- (Nothing yet)
 
 ## [0.1.0] - TBD
 
@@ -35,5 +37,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - PHPUnit test suites (Unit, Integration, Laravel)
 - PHPStan level 9, PHP CS Fixer, Infection configuration
 
-[Unreleased]: https://github.com/muradyanvano/php-lexorank/compare/v0.1.0...HEAD
-[0.1.0]: https://github.com/muradyanvano/php-lexorank/releases/tag/v0.1.0
+[Unreleased]: https://github.com/muradyanvano1995/php-lexorank/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/muradyanvano1995/php-lexorank/releases/tag/v0.1.0

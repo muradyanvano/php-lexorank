@@ -72,6 +72,15 @@ final class LexoRank
         return new self($bucket, LexoDecimal::parse($char . '00000'));
     }
 
+    /**
+     * Create a rank from a bucket and internal decimal magnitude.
+     *
+     * Applications must not depend on {@see LexoDecimal}. Prefer
+     * {@see parse()}, {@see min()}, {@see max()}, {@see middle()},
+     * {@see initial()}, {@see before()}, {@see after()}, or {@see between()}.
+     *
+     * @internal
+     */
     public static function from(LexoRankBucket $bucket, LexoDecimal $decimal): self
     {
         return new self($bucket, $decimal);

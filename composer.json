@@ -19,10 +19,10 @@
             "name": "Vano Muradyan"
         }
     ],
-    "homepage": "https://github.com/muradyanvano/php-lexorank",
+    "homepage": "https://github.com/muradyanvano1995/php-lexorank",
     "support": {
-        "issues": "https://github.com/muradyanvano/php-lexorank/issues",
-        "source": "https://github.com/muradyanvano/php-lexorank"
+        "issues": "https://github.com/muradyanvano1995/php-lexorank/issues",
+        "source": "https://github.com/muradyanvano1995/php-lexorank"
     },
     "require": {
         "php": "^8.1"
