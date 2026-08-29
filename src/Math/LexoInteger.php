@@ -370,7 +370,7 @@ final class LexoInteger
         for ($i = 0; $i < $size; ++$i) {
             $sum = ($left[$i] ?? 0) + ($right[$i] ?? 0) + $carry;
             $carry = intdiv($sum, $base);
-            $result[$i] = $sum % $base;
+            $result[] = $sum % $base;
         }
 
         if ($carry > 0) {
