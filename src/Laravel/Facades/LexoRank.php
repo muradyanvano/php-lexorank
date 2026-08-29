@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace MuradyanVano\LexoRank\Laravel\Facades;
 
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Support\Facades\Facade;
 use MuradyanVano\LexoRank\LexoRank as Rank;
 use MuradyanVano\LexoRank\LexoRankBucket;
@@ -26,10 +27,9 @@ use MuradyanVano\LexoRank\RebalanceResult;
  * @method static Rank               between(?Rank $lower, ?Rank $upper)
  * @method static list<Rank>         betweenMany(?Rank $lower, ?Rank $upper, int $count)
  * @method static list<Rank>         initialRanks(int $count, ?LexoRankBucket $bucket = null)
- * @method static list<string>       findDuplicates(iterable $ranks)
- * @method static void               assertNoDuplicates(iterable $ranks)
+ * @method static list<string>       findDuplicates(iterable<int|string, string|Rank> $ranks)
+ * @method static void               assertNoDuplicates(iterable<int|string, string|Rank> $ranks)
  * @method static int                maxRankLength()
- * @method static RebalanceResult    rebalance(iterable $ranks, ?LexoRankBucket $targetBucket = null)
  *
  * @see LexoRankService
  */
@@ -42,6 +42,7 @@ final class LexoRank extends Facade
 
     /**
      * @param iterable<int|string, string|Rank> $ranks
+     * @throws BindingResolutionException
      */
     public static function rebalance(iterable $ranks, ?LexoRankBucket $targetBucket = null): RebalanceResult
     {

@@ -247,7 +247,6 @@ final class LexoInteger
             $carry = intdiv($carry, $base);
         }
 
-        /** @var list<int> $result */
         return self::make($this->sign, $result);
     }
 
@@ -378,7 +377,6 @@ final class LexoInteger
             $result[] = $carry;
         }
 
-        /** @var list<int> $result */
         return $result;
     }
 
