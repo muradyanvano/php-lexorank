@@ -75,14 +75,23 @@ jobs:
       fail-fast: false
       matrix:
         include:
+          # Laravel 10 / Testbench 8 → PHPUnit 10
           - php: '8.1'
             testbench: '^8.35'
+            phpunit: '^10.5'
+            larastan: '^2.9'
             laravel: '10'
+          # Laravel 11 / Testbench 9 → PHPUnit 11
           - php: '8.2'
             testbench: '^9.0'
+            phpunit: '^11.5.3'
+            larastan: '^3.0'
             laravel: '11'
+          # Laravel 12 / Testbench 10 → PHPUnit 11
           - php: '8.3'
             testbench: '^10.0'
+            phpunit: '^11.5.3'
+            larastan: '^3.0'
             laravel: '12'
     steps:
       - uses: actions/checkout@v4
@@ -104,7 +113,10 @@ jobs:
 
       - name: Require Testbench ${{ matrix.testbench }} for Laravel ${{ matrix.laravel }}
         run: |
-          composer require --dev --no-update "orchestra/testbench:${{ matrix.testbench }}"
+          composer require --dev --no-update \
+            "orchestra/testbench:${{ matrix.testbench }}" \
+            "phpunit/phpunit:${{ matrix.phpunit }}" \
+            "larastan/larastan:${{ matrix.larastan }}"
           composer update --prefer-stable --no-interaction --no-progress
 
       - name: Run Laravel test suite

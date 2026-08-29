@@ -61,7 +61,15 @@ use MuradyanVano\LexoRank\LexoRank as Rank;
 use MuradyanVano\LexoRank\Laravel\Facades\LexoRank as LexoRankFacade;
 ```
 
-## Testbench
+## Testbench / CI matrix
+
+| PHP | Laravel | Testbench | PHPUnit | Larastan |
+|-----|---------|-----------|---------|----------|
+| 8.1 | 10 | `^8.35` | `^10.5` | `^2.9` |
+| 8.2 | 11 | `^9.0` | `^11.5.3` | `^3.0` |
+| 8.3 | 12 | `^10.0` | `^11.5.3` | `^3.0` |
+
+Root `composer.json` allows `phpunit/phpunit: ^10.5\|^11.5` so Testbench 9/10 can resolve. CI pins matching PHPUnit + Larastan per matrix cell.
 
 Tests: `tests/Laravel/LaravelIntegrationTest.php`
 

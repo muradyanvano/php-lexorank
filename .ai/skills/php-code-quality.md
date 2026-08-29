@@ -8,7 +8,7 @@
 |------|--------|---------|
 | PHP CS Fixer | `.php-cs-fixer.dist.php` | `composer format` / `composer format-check` |
 | PHPStan 9 | `phpstan.neon.dist` | `composer analyse` |
-| PHPUnit 10 | `phpunit.xml.dist` | `composer test` |
+| PHPUnit 10–11 | `phpunit.xml.dist` | `composer test` |
 | Rector | `rector.php` | `composer rector-check` |
 | Infection | `infection.json.dist` | `composer infection` |
 
