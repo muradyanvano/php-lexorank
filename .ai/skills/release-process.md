@@ -55,14 +55,17 @@ Ensure `composer.json` has valid `name`, `license`, `autoload`, `support` URLs.
 
 From `.github/workflows/`:
 
-- **tests.yml** — PHPUnit matrix, composer validate, prefer-lowest/stable, Laravel Testbench
-- **static-analysis.yml** — PHPStan, format-check
+- **tests.yml** — PHPUnit core matrix (8.1–8.4), Laravel 12 on PHP 8.2+, composer validate, `composer audit` on Laravel jobs
+- **static-analysis.yml** — PHPStan, format-check, `composer audit`
 
-Local equivalent:
+Local equivalent (PHP 8.2+ recommended for Laravel + audit):
 
 ```bash
 composer check
+composer audit
 ```
+
+Dev dependency floor: `laravel/framework ^12.61.1` (patched). Do not reintroduce Laravel 10/11 into the verified matrix.
 
 ## Post-release
 

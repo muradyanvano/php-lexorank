@@ -19,6 +19,8 @@ This directory contains **Cursor Agent Skills** for working on `muradyanvano/php
 
 **When you change public behavior, APIs, config keys, or documented invariants, update the relevant skill(s) in the same PR.**
 
+Also keep root [`AGENTS.md`](../AGENTS.md) aligned when compatibility, CI, or security policy changes.
+
 Checklist:
 
 1. Identify affected skills from the table above

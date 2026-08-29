@@ -33,8 +33,9 @@ This implementation uses **base-36 digit arrays** (no floats, BCMath, or GMP), *
 
 ## 3. Requirements
 
-- PHP **^8.1**
-- Laravel integration is optional (dev/test via `orchestra/testbench`)
+- PHP **^8.1** (framework-independent core)
+- Laravel integration is **optional** (not a runtime dependency)
+- Running package Laravel tests / using Testbench locally requires **PHP 8.2+** and **Laravel 12.61.1+** (see compatibility below)
 
 ---
 
@@ -208,6 +209,14 @@ Apply `mapping()` inside a **database transaction**. See [docs/rebalancing.md](d
 ---
 
 ## 13. Laravel integration
+
+Optional. The core installs without Laravel. Supported integration testing target:
+
+| Laravel | Testbench | PHP |
+|---------|-----------|-----|
+| **12.61.1+** | ^10 | **8.2+** |
+
+Laravel 10/11 are **not** claimed or CI-verified (unpatched advisories on those lines).
 
 **Cast:**
 

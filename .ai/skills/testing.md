@@ -4,19 +4,20 @@
 
 ## Suites (`phpunit.xml.dist`)
 
-| Suite | Path | Focus |
-|-------|------|-------|
-| Unit | `tests/Unit/` | LexoRank, Math, Service, Rebalancer, invariants |
-| Integration | `tests/Integration/` | Performance / larger scenarios |
-| Laravel | `tests/Laravel/` | Testbench, cast, trait, facade |
+| Suite | Path | Focus | PHP |
+|-------|------|-------|-----|
+| Unit | `tests/Unit/` | LexoRank, Math, Service, Rebalancer, invariants | 8.1+ |
+| Integration | `tests/Integration/` | Performance / larger scenarios | 8.1+ |
+| Laravel | `tests/Laravel/` | Testbench, cast, trait, facade | **8.2+** (Laravel 12.61.1+) |
 
 ## Commands
 
 ```bash
-composer test              # all suites
+composer test              # all suites (Laravel needs PHP 8.2+)
 composer test:unit
 composer test:integration
 composer test:laravel
+composer audit             # must report no known vulnerabilities
 ```
 
 ## Key test files
@@ -45,6 +46,7 @@ composer test:laravel
 - Use `final class ...Test extends TestCase`
 - Prefer data from actual API (`LexoRank::parse('0|100000:')`) not invented ranks
 - Exception tests: `expectException` with specific exception class
+- Every bug fix must add a regression test that fails before the fix
 
 ## Laravel tests
 
@@ -53,6 +55,8 @@ Extend `Orchestra\Testbench\TestCase`:
 - `getPackageProviders()` → `[LexoRankServiceProvider::class]`
 - `getPackageAliases()` → `LexoRankFacade`
 - Define migrations in `defineDatabaseMigrations()`
+
+Require-dev lockset: `laravel/framework ^12.61.1`, `orchestra/testbench ^10.0`.
 
 ## Mutation testing
 
@@ -64,10 +68,15 @@ Thresholds in `infection.json.dist` (min MSI 70%).
 
 ## CI alignment
 
-GitHub Actions runs PHPUnit on PHP 8.1–8.4 and Laravel via Testbench matrix. See `.github/workflows/tests.yml`.
+`.github/workflows/tests.yml`:
 
-After adding tests, run locally:
+- PHP **8.1**: strip Laravel/Testbench/Larastan, pin PHPUnit 10, run Unit+Integration
+- PHP **8.2–8.4**: full install, Unit+Integration; separate Laravel job runs Laravel suite + `composer audit`
+- Static analysis job (PHP 8.3): format-check, PHPStan, audit
+
+After adding tests, run locally (on PHP 8.2+ for full suite):
 
 ```bash
 composer check
+composer audit
 ```

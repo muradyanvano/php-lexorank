@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Raised Laravel integration test floor to **Laravel 12.61.1+** / Orchestra Testbench **^10** (PHP 8.2+) to clear `composer audit` advisories that remain open on Laravel 10/11.
+- Removed Composer `audit.block-insecure: false`; CI now fails on known vulnerabilities.
+- Documented truthful matrix: PHP 8.1 runs core tests only; Laravel suite requires PHP 8.2+.
+- Added root `AGENTS.md` for coding agents.
+
 ### Added
 
 - (Nothing yet)

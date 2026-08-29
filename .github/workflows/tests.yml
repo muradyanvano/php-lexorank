@@ -57,6 +57,13 @@ jobs:
             composer-${{ matrix.php }}-${{ matrix.stability }}-
             composer-${{ matrix.php }}-
 
+      - name: Strip Laravel deps on PHP 8.1 (core-only)
+        if: matrix.php == '8.1'
+        run: |
+          # Laravel 12 / Testbench 10 require PHP 8.2+. Core remains PHP 8.1-compatible.
+          composer remove --dev laravel/framework orchestra/testbench larastan/larastan --no-update
+          composer require --dev --no-update "phpunit/phpunit:^10.5"
+
       - name: Install dependencies (${{ matrix.stability }})
         run: |
           if [ "${{ matrix.stability }}" = "lowest" ]; then
@@ -69,30 +76,12 @@ jobs:
         run: vendor/bin/phpunit --testsuite=Unit,Integration --colors=always
 
   laravel:
-    name: Laravel (PHP ${{ matrix.php }}, Testbench ${{ matrix.testbench }})
+    name: Laravel 12 (PHP ${{ matrix.php }})
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        include:
-          # Laravel 10 / Testbench 8 → PHPUnit 10
-          - php: '8.1'
-            testbench: '^8.35'
-            phpunit: '^10.5'
-            larastan: '^2.9'
-            laravel: '10'
-          # Laravel 11 / Testbench 9 → PHPUnit 11
-          - php: '8.2'
-            testbench: '^9.0'
-            phpunit: '^11.5.3'
-            larastan: '^3.0'
-            laravel: '11'
-          # Laravel 12 / Testbench 10 → PHPUnit 11
-          - php: '8.3'
-            testbench: '^10.0'
-            phpunit: '^11.5.3'
-            larastan: '^3.0'
-            laravel: '12'
+        php: ['8.2', '8.3', '8.4']
     steps:
       - uses: actions/checkout@v4
 
@@ -107,17 +96,18 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.composer/cache/files
-          key: composer-laravel-${{ matrix.php }}-${{ matrix.testbench }}-${{ hashFiles('composer.json') }}
+          key: composer-laravel-12-${{ matrix.php }}-${{ hashFiles('composer.json') }}
           restore-keys: |
-            composer-laravel-${{ matrix.php }}-
+            composer-laravel-12-${{ matrix.php }}-
 
-      - name: Require Testbench ${{ matrix.testbench }} for Laravel ${{ matrix.laravel }}
-        run: |
-          composer require --dev --no-update \
-            "orchestra/testbench:${{ matrix.testbench }}" \
-            "phpunit/phpunit:${{ matrix.phpunit }}" \
-            "larastan/larastan:${{ matrix.larastan }}"
-          composer update --prefer-stable --no-interaction --no-progress
+      - name: Install dependencies (Laravel 12.61.1+ / Testbench 10)
+        run: composer update --prefer-stable --no-interaction --no-progress
+
+      - name: Show installed Laravel version
+        run: composer show laravel/framework
+
+      - name: Composer audit
+        run: composer audit
 
       - name: Run Laravel test suite
         run: vendor/bin/phpunit --testsuite=Laravel --colors=always

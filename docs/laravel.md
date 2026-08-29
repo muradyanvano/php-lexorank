@@ -2,6 +2,17 @@
 
 Optional Eloquent helpers for applications using Laravel. The core package has **no** Laravel runtime dependency; Laravel code lives under `MuradyanVano\LexoRank\Laravel\`.
 
+## Supported versions (truthful matrix)
+
+| Component | Version |
+|-----------|---------|
+| Package core | PHP **8.1+** |
+| Laravel (integration / Testbench) | **12.61.1+** |
+| Orchestra Testbench (require-dev) | **^10** |
+| PHP for Laravel tests | **8.2+** |
+
+Laravel 10 and 11 are not part of the verified matrix: published security advisories remain open on those lines, and CI does not install them.
+
 ## Installation
 
 ```bash

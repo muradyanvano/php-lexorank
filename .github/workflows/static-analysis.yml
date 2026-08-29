@@ -35,6 +35,9 @@ jobs:
       - name: Install dependencies
         run: composer update --prefer-stable --no-interaction --no-progress
 
+      - name: Composer audit
+        run: composer audit
+
       - name: PHP CS Fixer (dry run)
         run: composer format-check
 

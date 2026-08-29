@@ -8,6 +8,7 @@ This document describes the design of **muradyanvano/php-lexorank** (`MuradyanVa
 - **O(1) inserts** — new positions are computed from neighbours without renumbering the whole list.
 - **No floating-point math** — all arithmetic uses digit arrays in base 36; no `float`, BCMath, or GMP.
 - **Framework-optional core** — the ranking engine works in plain PHP; Laravel integration is an optional layer.
+- **Truthful Laravel matrix** — require-dev verifies Laravel **12.61.1+** (Testbench ^10) on PHP **8.2+**; core remains PHP **8.1+**.
 - **Explicit persistence** — rebalancing returns a mapping; the library never writes to a database.
 
 ## Layer overview

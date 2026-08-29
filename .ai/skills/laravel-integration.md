@@ -10,6 +10,13 @@
 - `LexoRankServiceProvider`
 - Facade alias **`LexoRankFacade`** (not `LexoRank` — collides with value object)
 
+## Optional dependency rule
+
+- Core `require` is only `php: ^8.1`.
+- `laravel/framework` (`^12.61.1`), `orchestra/testbench` (`^10.0`), and `larastan/larastan` (`^3.0`) are **require-dev**.
+- Consumers install the package without Laravel.
+- Laravel integration tests require **PHP 8.2+**.
+
 ## ServiceProvider
 
 File: `LexoRankServiceProvider.php`
@@ -63,18 +70,15 @@ use MuradyanVano\LexoRank\Laravel\Facades\LexoRank as LexoRankFacade;
 
 ## Testbench / CI matrix
 
-| PHP | Laravel | Testbench | PHPUnit | Larastan |
-|-----|---------|-----------|---------|----------|
-| 8.1 | 10 | `^8.35` | `^10.5` | `^2.9` |
-| 8.2 | 11 | `^9.0` | `^11.5.3` | `^3.0` |
-| 8.3 | 12 | `^10.0` | `^11.5.3` | `^3.0` |
+| PHP | What runs | Laravel | Testbench |
+|-----|-----------|---------|-----------|
+| 8.1 | Unit + Integration only | — (deps stripped in CI) | — |
+| 8.2–8.4 | Unit + Integration + Laravel + audit | **12.61.1+** | **^10** |
 
-Root `composer.json` allows `phpunit/phpunit: ^10.5\|^11.5` so Testbench 9/10 can resolve. CI pins matching PHPUnit + Larastan per matrix cell.
-
-Tests: `tests/Laravel/LaravelIntegrationTest.php`
+Do **not** claim Laravel 10/11 support: those lines remain affected by published advisories and are not CI-verified.
 
 ```bash
-composer test:laravel
+composer test:laravel   # requires PHP 8.2+ and Laravel 12.61.1+
 ```
 
 Uses Orchestra Testbench, SQLite in-memory, sample `Task` model with cast + trait.
@@ -88,7 +92,8 @@ Uses Orchestra Testbench, SQLite in-memory, sample `Task` model with cast + trai
 - Add facades for `LexoRank` value object
 - Persist inside trait methods except `*AndSave` variants
 - Pull Laravel into core `src/LexoRank.php` etc.
+- Ignore Composer security advisories to keep old Laravel lines
 
 ## When editing Laravel layer
 
-Update: `docs/laravel.md`, README §13–14, `tests/Laravel/`, this skill.
+Update: `docs/laravel.md`, README Laravel sections, `tests/Laravel/`, this skill, `AGENTS.md` if compatibility matrix changes.
