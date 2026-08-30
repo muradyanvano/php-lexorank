@@ -11,6 +11,8 @@ Production-ready [LexoRank](https://www.atlassian.com/blog/atlassian-engineering
 **Namespace:** `MuradyanVano\LexoRank`  
 **Author:** [Vano Muradyan](https://github.com/muradyanvano1995)
 
+**Demo:** [php-lexorank-demo-app](https://github.com/muradyanvano1995/php-lexorank-demo-app)
+
 ---
 
 ## 1. Overview
@@ -68,6 +70,19 @@ $between = $first->between($second);   // strictly between
 $service = new LexoRankService();
 $bulk = $service->initialRanks(10);    // 10 evenly spaced ranks in bucket 0
 ```
+
+---
+
+## Demo application
+
+A complete Laravel and React demonstration is available in
+[php-lexorank-demo-app](https://github.com/muradyanvano1995/php-lexorank-demo-app).
+
+The app is a polished drag-and-drop Kanban board with a Laravel REST API and a React SPA. It shows real-world rank generation, insertion at the start/end/between neighbours, same-column and cross-column moves, canonical persistence, Eloquent cast and `HasLexoRank` usage, container/service wiring, diagnostics, duplicate detection, bucket visibility, manual rebalancing, reload-safe ordering, and an API-driven LexoRank playground.
+
+**Demo stack:** Laravel 13, React 19, TypeScript, Tailwind CSS v4, and dnd-kit.
+
+The demo lives in a separate repository as a practical integration example. Its Laravel 13 app stack does **not** change this package’s official support matrix — see [Requirements](#3-requirements) and [Laravel integration](#13-laravel-integration) (CI-verified Laravel **12.61.1+**).
 
 ---
 
@@ -315,6 +330,7 @@ Always `parse()` external ranks and persist canonical output. Details: [docs/arc
 | [docs/laravel.md](docs/laravel.md) | Eloquent, migrations, transactions |
 | [docs/rebalancing.md](docs/rebalancing.md) | Rebalance procedure, concurrency |
 | [docs/troubleshooting.md](docs/troubleshooting.md) | Common errors |
+| [Demo Application](https://github.com/muradyanvano1995/php-lexorank-demo-app) | Laravel 13 + React 19 Kanban demo (separate repo) |
 
 ---
 

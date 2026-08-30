@@ -6,7 +6,7 @@
 
 | Path | Audience |
 |------|----------|
-| `README.md` | First contact — 22 sections, quick API reference |
+| `README.md` | First contact — 22 numbered sections + Demo application |
 | `docs/architecture.md` | Design, public vs internal, compatibility |
 | `docs/algorithm.md` | Grammar, buckets, between/before/after |
 | `docs/laravel.md` | Eloquent, migrations, transactions |
@@ -14,6 +14,7 @@
 | `docs/troubleshooting.md` | Errors and fixes |
 | `CHANGELOG.md` | Releases |
 | `CONTRIBUTING.md`, `SECURITY.md`, `CODE_OF_CONDUCT.md` | Community |
+| [php-lexorank-demo-app](https://github.com/muradyanvano1995/php-lexorank-demo-app) | Official demo (separate repo) — Kanban + REST example |
 
 ## Accuracy rules
 
@@ -25,13 +26,14 @@
 6. State compatibility boundary: inspired by Atlassian, not byte-for-byte clone
 7. Distinguish Composer package `muradyanvano/php-lexorank` from GitHub repo `muradyanvano1995/php-lexorank`
 
-## README structure (22 sections)
+## README structure (22 numbered sections + demo)
 
 1. Overview  
 2. Features  
 3. Requirements  
 4. Installation  
 5. Quick start  
+- **Demo application** (unnumbered; keep after Quick start, before Rank format)
 6. Rank format  
 7. Buckets  
 8. LexoRank API  
@@ -50,7 +52,13 @@
 21. Security  
 22. License  
 
-Keep section numbers stable when editing.
+Keep numbered section numbers stable when editing. Preserve the **Demo application** section and its link to `https://github.com/muradyanvano1995/php-lexorank-demo-app`.
+
+### Demo application rules
+
+- Official documentation resource; maintained in a **separate** repository.
+- Demo app dependencies (Laravel 13, React, etc.) are **not** dependencies of this PHP package.
+- The demo’s Laravel version must **not** redefine this package’s CI / compatibility matrix (official Laravel target remains as documented in README §3 / §13 and `docs/laravel.md`).
 
 ## Code examples
 
