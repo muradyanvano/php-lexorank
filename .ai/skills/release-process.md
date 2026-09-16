@@ -48,9 +48,9 @@ git push origin v0.1.0
 ## Packagist
 
 Package name: `muradyanvano/php-lexorank`  
-GitHub repository: `https://github.com/muradyanvano1995/php-lexorank`
+GitHub repository: `https://github.com/muradyanvano/php-lexorank`
 
-Ensure `composer.json` has valid `name`, `license`, `autoload`, and `support` / `homepage` URLs pointing at **`muradyanvano1995/php-lexorank`** (not `muradyanvano/php-lexorank` on GitHub).
+Ensure `composer.json` has valid `name`, `license`, `autoload`, and `support` / `homepage` URLs pointing at **`muradyanvano/php-lexorank`** on GitHub.
 
 ## CI gates (must pass)
 

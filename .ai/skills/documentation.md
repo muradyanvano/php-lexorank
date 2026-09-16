@@ -24,7 +24,7 @@
 4. Facade alias is **`LexoRankFacade`**, not `LexoRank`
 5. Mark `@internal` Math as not public API; do not document `LexoRank::from()`, `decimal()`, or `betweenDecimals()` as consumer APIs
 6. State compatibility boundary: inspired by Atlassian, not byte-for-byte clone
-7. Distinguish Composer package `muradyanvano/php-lexorank` from GitHub repo `muradyanvano1995/php-lexorank`
+7. Keep Composer package `muradyanvano/php-lexorank` and GitHub repo `muradyanvano/php-lexorank` aligned; do not rename the PHP namespace when updating identity metadata
 
 ## README structure (22 numbered sections + demo)
 

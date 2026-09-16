@@ -2,7 +2,7 @@
 
 This document describes the design of **muradyanvano/php-lexorank** (`MuradyanVano\LexoRank`): what is public, what is internal, and how the pieces fit together.
 
-**GitHub repository:** [muradyanvano1995/php-lexorank](https://github.com/muradyanvano1995/php-lexorank) (distinct from the Composer package name).
+**GitHub repository:** [muradyanvano/php-lexorank](https://github.com/muradyanvano/php-lexorank).
 
 ## Goals
 

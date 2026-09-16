@@ -5,7 +5,7 @@ Thank you for contributing to **php-lexorank**.
 ## Development setup
 
 ```bash
-git clone https://github.com/muradyanvano1995/php-lexorank.git
+git clone https://github.com/muradyanvano/php-lexorank.git
 cd php-lexorank
 composer install
 ```

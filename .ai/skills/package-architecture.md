@@ -38,9 +38,9 @@ Exception/*           → typed failures
 | Surface | Value |
 |---------|-------|
 | Composer package | `muradyanvano/php-lexorank` |
-| GitHub repository | `https://github.com/muradyanvano1995/php-lexorank` |
+| GitHub repository | `https://github.com/muradyanvano/php-lexorank` |
 
-Packagist vendor and GitHub username differ intentionally. Keep `composer.json` `homepage` / `support` on the `muradyanvano1995` GitHub path.
+Keep `composer.json` `homepage` / `support` on the `muradyanvano/php-lexorank` GitHub path. Do not rename the PHP namespace when updating package or repository metadata.
 
 ## Design constraints
 

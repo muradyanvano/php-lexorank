@@ -7,9 +7,9 @@ Production-ready [LexoRank](https://www.atlassian.com/blog/atlassian-engineering
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 **Package:** `muradyanvano/php-lexorank`  
-**GitHub:** [muradyanvano1995/php-lexorank](https://github.com/muradyanvano1995/php-lexorank)  
+**GitHub:** [muradyanvano/php-lexorank](https://github.com/muradyanvano/php-lexorank)  
 **Namespace:** `MuradyanVano\LexoRank`  
-**Author:** [Vano Muradyan](https://github.com/muradyanvano1995)
+**Author:** [Vano Muradyan](https://github.com/muradyanvano)
 
 **Demo:** [php-lexorank-demo-app](https://github.com/muradyanvano1995/php-lexorank-demo-app)
 
@@ -337,7 +337,7 @@ Always `parse()` external ranks and persist canonical output. Details: [docs/arc
 ## 19. Development
 
 ```bash
-git clone https://github.com/muradyanvano1995/php-lexorank.git
+git clone https://github.com/muradyanvano/php-lexorank.git
 cd php-lexorank
 composer update
 composer check    # validate + format-check + phpstan + core tests (PHP 8.1+)

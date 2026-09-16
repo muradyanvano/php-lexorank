@@ -34,14 +34,14 @@ final class ComposerMetadataTest extends TestCase
 
         foreach (['homepage' => $homepage, 'support.issues' => $issues, 'support.source' => $source] as $field => $url) {
             self::assertStringContainsString(
-                'github.com/muradyanvano1995/php-lexorank',
-                $url,
-                sprintf('%s must reference github.com/muradyanvano1995/php-lexorank, got: %s', $field, $url),
-            );
-            self::assertStringNotContainsString(
                 'github.com/muradyanvano/php-lexorank',
                 $url,
-                sprintf('%s must not use the incorrect github.com/muradyanvano/php-lexorank path.', $field),
+                sprintf('%s must reference github.com/muradyanvano/php-lexorank, got: %s', $field, $url),
+            );
+            self::assertStringNotContainsString(
+                'github.com/muradyanvano1995/php-lexorank',
+                $url,
+                sprintf('%s must not use the old github.com/muradyanvano1995/php-lexorank path.', $field),
             );
         }
     }
