@@ -14,7 +14,7 @@
 | `docs/troubleshooting.md` | Errors and fixes |
 | `CHANGELOG.md` | Releases |
 | `CONTRIBUTING.md`, `SECURITY.md`, `CODE_OF_CONDUCT.md` | Community |
-| [php-lexorank-demo-app](https://github.com/muradyanvano1995/php-lexorank-demo-app) | Official demo (separate repo) — Kanban + REST example |
+| [php-lexorank-demo-app](https://github.com/muradyanvano/php-lexorank-demo-app) | Official demo (separate repo) — Kanban + REST example |
 
 ## Accuracy rules
 
@@ -52,7 +52,7 @@
 21. Security  
 22. License  
 
-Keep numbered section numbers stable when editing. Preserve the **Demo application** section and its link to `https://github.com/muradyanvano1995/php-lexorank-demo-app`.
+Keep numbered section numbers stable when editing. Preserve the **Demo application** section and its link to `https://github.com/muradyanvano/php-lexorank-demo-app`.
 
 ### Demo application rules
 

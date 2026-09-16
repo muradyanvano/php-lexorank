@@ -38,11 +38,6 @@ final class ComposerMetadataTest extends TestCase
                 $url,
                 sprintf('%s must reference github.com/muradyanvano/php-lexorank, got: %s', $field, $url),
             );
-            self::assertStringNotContainsString(
-                'github.com/muradyanvano1995/php-lexorank',
-                $url,
-                sprintf('%s must not use the old github.com/muradyanvano1995/php-lexorank path.', $field),
-            );
         }
     }
 }

@@ -15,7 +15,7 @@ Optional Eloquent helpers for applications using Laravel. The core package has *
 Laravel 10 and 11 are not part of the verified matrix.
 
 For an end-to-end Kanban example (Laravel 13 + React 19 SPA), see the separate
-[php-lexorank-demo-app](https://github.com/muradyanvano1995/php-lexorank-demo-app)
+[php-lexorank-demo-app](https://github.com/muradyanvano/php-lexorank-demo-app)
 repository. That demo’s Laravel 13 stack is an integration example only and does
 **not** extend this package’s official support matrix above.
 
