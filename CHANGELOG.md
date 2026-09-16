@@ -7,9 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.3] - 2026-09-17
+
 ### Changed
 
 - Migrated GitHub repository and metadata links from `muradyanvano1995/php-lexorank` to `muradyanvano/php-lexorank` (Composer package name `muradyanvano/php-lexorank` unchanged).
+- Updated demo application links to `muradyanvano/php-lexorank-demo-app`.
 
 ## [0.1.2] - 2026-08-30
 
@@ -49,7 +52,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - PHPUnit test suites (Unit, Integration, Laravel)
 - PHPStan level 9, PHP CS Fixer, Infection configuration
 
-[Unreleased]: https://github.com/muradyanvano/php-lexorank/compare/v0.1.2...HEAD
+[Unreleased]: https://github.com/muradyanvano/php-lexorank/compare/v0.1.3...HEAD
+[0.1.3]: https://github.com/muradyanvano/php-lexorank/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/muradyanvano/php-lexorank/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/muradyanvano/php-lexorank/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/muradyanvano/php-lexorank/releases/tag/v0.1.0
